@@ -29,6 +29,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'annotate'
 gem 'better_errors'
+gem 'devise'
 
 
 group :development, :test do
