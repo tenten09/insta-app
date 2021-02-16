@@ -6,9 +6,16 @@
     <p>{{ message }}</p>
     <ul>
       <li v-for="post in posts" :key="post.id">
-        {{ post.title }}： {{ post.body }}
+        {{post.id}} {{ post.title }}
+        <br>
+         {{ post.body }}
       </li>
     </ul>
+    <div>
+      <input v-model="title" placeholder="title">
+      <input v-model="body" placeholder="body">
+      <button @click="addPost">新規投稿</button>
+    </div>
   </div>
 </template>
 
@@ -19,7 +26,9 @@ export default {
   data: function () {
     return {
       message: "Hello Vue!",
-      posts: "posts"
+      posts: "posts",
+      title: '',
+      body: '',
     }
   },
   mounted () {
@@ -31,6 +40,15 @@ export default {
       .then(response => (
         this.posts = response.data
       ))
+    },
+    addPost: function() {
+      axios.post('/api/v1/posts', {
+        title: this.title,
+        body: this.body
+      })
+      .then(response => (
+        this.setPost()
+      ));
     }
   }
 }
